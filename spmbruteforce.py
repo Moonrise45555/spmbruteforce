@@ -14,18 +14,19 @@ def SimuQuickEnd(crntsquiglet,crntpoints,crntChain):
     
 def BruteForce(crntEnemies,crntPoints,crntChain,depth=0,prnt=False):
     global maxpnts
-    crntAttack = (crntPoints > 20000) + 1
-    if crntPoints > maxpnts:
-        if prnt:
-            print(crntPoints)
-        summaxpnts = sum(crntEnemies)
-        maxpnts = crntPoints
+    crntAttack = (crntPoints > 20000) + 1 + (crntPoints > 60000)
+   
     if crntEnemies == []:
+        if crntPoints > maxpnts:
+            maxpnts = crntPoints
         return
-    if not (crntAttack >= max(crntEnemies)):
+    if (crntAttack >= max(crntEnemies)):
+        #all enemies will go down in one hit anyway: it doesnt matter which one we choose
+        SimuQuickEnd(crntEnemies,crntPoints,crntChain)
+    else:
         for i in range(len(crntEnemies)):
             sq = copy(crntEnemies)
-            sq[i] -= crntAttack #applies the damage: set to 1 since
+            sq[i] -= crntAttack #applies the damage
             if sq[i] <= 0:
                 newChain = crntChain + 100
                 del sq[i]
@@ -35,18 +36,17 @@ def BruteForce(crntEnemies,crntPoints,crntChain,depth=0,prnt=False):
             
 
             BruteForce(sq,newpnts,newChain,depth + 1)
-    else:
-        SimuQuickEnd(crntEnemies,crntPoints,crntChain)
+    
 
 
 
 for i in range(22):
+    print(i)
     t = perf_counter()
     BruteForce([2] * i,0,0)
     print(maxpnts)
     t = perf_counter() - t
     print(t)
-    print(i)
 
 #BruteForce(deepcopy(squiglets),0,0)
 print(maxpnts)
