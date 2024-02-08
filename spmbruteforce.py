@@ -35,17 +35,7 @@ def BruteForce(crntsquiglet,crntPoints,crntChain,depth=0,prnt=False):
 
             BruteForce(sq,newpnts,newChain,depth + 1)
     else:
-        sq = copy(crntsquiglet)
-        sq[0] -= 2 #applies the damage: set to 2 since
-        
-        newChain = crntChain + 100
-        del sq[0]
-        
-        if newpnts < maxpnts and summaxpnts > sum(squiglets):
-            #doesnt continue bruteforce if its already "fallen behind"
-            return
-
-        BruteForce(sq,newpnts,newChain,depth + 1)
+        SimuQuickEnd(crntsquiglet,crntPoints,crntChain)
 
 
 
