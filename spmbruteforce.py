@@ -25,11 +25,26 @@ def BruteForce(crntEnemies,crntPoints,crntChain,depth=0,prnt=False):
         SimuQuickEnd(crntEnemies,crntPoints,crntChain)
     else:
         for i in range(len(crntEnemies)):
+            seenHPs = []
+            HPindex = []
+            if crntEnemies[i] in seenHPs:
+                continue
+            else:
+                seenHPs.append(crntEnemies[i])
+                HPindex.append(i)
+
+
+
+
+
+
+
+        for i in range(len(seenHPs)):
             sq = copy(crntEnemies)
-            sq[i] -= crntAttack #applies the damage
-            if sq[i] <= 0:
+            sq[HPindex[i]] -= crntAttack #applies the damage
+            if sq[HPindex[i]] <= 0:
                 newChain = crntChain + 100
-                del sq[i]
+                del sq[HPindex[i]]
             else:
                 newChain = crntChain
             newpnts = crntPoints + newChain
@@ -49,6 +64,5 @@ for i in range(22):
     print(t)
 
 #BruteForce(deepcopy(squiglets),0,0)
-print(maxpnts)
 
         
