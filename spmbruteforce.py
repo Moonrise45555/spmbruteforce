@@ -1,7 +1,6 @@
 from copy import deepcopy
 from copy import copy
 from time import perf_counter
-squiglets = [2] * 10
 summaxpnts = 0
 maxpnts = 0
 def SimuQuickEnd(crntsquiglet,crntpoints,crntChain):
@@ -13,18 +12,20 @@ def SimuQuickEnd(crntsquiglet,crntpoints,crntChain):
         
         maxpnts = crntpoints
     
-def BruteForce(crntsquiglet,crntPoints,crntChain,depth=0,prnt=False):
+def BruteForce(crntEnemies,crntPoints,crntChain,depth=0,prnt=False):
     global maxpnts
     crntAttack = (crntPoints > 20000) + 1
     if crntPoints > maxpnts:
         if prnt:
             print(crntPoints)
-        summaxpnts = sum(crntsquiglet)
+        summaxpnts = sum(crntEnemies)
         maxpnts = crntPoints
-    if crntAttack != 2:
-        for i in range(len(crntsquiglet)):
-            sq = copy(crntsquiglet)
-            sq[i] -= 1 #applies the damage: set to 1 since
+    if crntEnemies == []:
+        return
+    if not (crntAttack >= max(crntEnemies)):
+        for i in range(len(crntEnemies)):
+            sq = copy(crntEnemies)
+            sq[i] -= crntAttack #applies the damage: set to 1 since
             if sq[i] <= 0:
                 newChain = crntChain + 100
                 del sq[i]
@@ -35,13 +36,14 @@ def BruteForce(crntsquiglet,crntPoints,crntChain,depth=0,prnt=False):
 
             BruteForce(sq,newpnts,newChain,depth + 1)
     else:
-        SimuQuickEnd(crntsquiglet,crntPoints,crntChain)
+        SimuQuickEnd(crntEnemies,crntPoints,crntChain)
 
 
 
-for i in range(10):
+for i in range(22):
     t = perf_counter()
     BruteForce([2] * i,0,0)
+    print(maxpnts)
     t = perf_counter() - t
     print(t)
     print(i)
