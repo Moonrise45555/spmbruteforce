@@ -71,7 +71,6 @@ maxpnts = 0
 
 
 for i in range(1000):
-    i = 22
     if i == 0:
         continue
     print("# of squigs ",i)
