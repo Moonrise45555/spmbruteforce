@@ -29,6 +29,18 @@ def BruteForce(crntEnemies,crntPoints,crntChain,depth=0,prnt=False):
         else:
             seenHPs.append(crntEnemies[i])
             HPindex.append(i)
+    if crntChain == 0:
+        #if you have 0 chain, you jump on the one with the least HP, since jumping on anything that wouldnt die would be a waste anyway
+        #maybe kills the completeness of the program? 
+        minHP = 100000
+        for i in range(len(seenHPs)):
+            if seenHPs[i] < minHP:
+                minHP = seenHPs[i]
+                minIndex = HPindex[i]
+        seenHPs = [minHP]
+        HPindex = [minIndex]
+                
+        
 
 
 
