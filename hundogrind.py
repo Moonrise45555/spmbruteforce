@@ -2,9 +2,10 @@ import math
 
 count = 0
 score = int(input("Enter your starting score:"))
+target = int(input("Enter the target score:"))
 frames = 0
 
-while score < 99999999:
+while score < target:
     count += 1
     score += (count * 10)
     frames += 58
@@ -26,6 +27,16 @@ if 0 <= score <= 9999:
 if level >= 99:
     level = 99
 
-time = str(hours) + ":" + str(minutes) + ":" + str("%.2f" % seconds)
+if 0 <= seconds <= 9:
+    seconds = "0" + str("%.2f" % seconds)
+else:
+    seconds = str("%.2f" % seconds)
+
+if 0 <= minutes <= 9:
+    minutes = "0" + str(minutes)
+else:
+    pass
+
+time = str(hours) + ":" + str(minutes) + ":" + seconds
 
 print(count, "Bounces | Score:", score, "| Time Elapsed:", time)
