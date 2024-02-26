@@ -8,7 +8,7 @@ frames = 0
 startlevel = (score ** 0.5)/50
 startlevel = math.ceil(startlevel)
 
-if startlevel == 0:
+if score <= 9999:
     startlevel = 1
 
 while score < target:
@@ -27,7 +27,7 @@ seconds = (frames % 3600)/60
 if score >= 99999999:
     score = 99999999
 
-if 0 <= score <= 9999:
+if score <= 9999:
     level = 1
 
 if level >= 99:
@@ -40,8 +40,6 @@ else:
 
 if 0 <= minutes <= 9:
     minutes = "0" + str(minutes)
-else:
-    pass
 
 time = str(hours) + ":" + str(minutes) + ":" + seconds
 
