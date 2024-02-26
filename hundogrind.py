@@ -5,6 +5,12 @@ score = int(input("Enter your starting score:"))
 target = int(input("Enter the target score:"))
 frames = 0
 
+startlevel = (score ** 0.5)/50
+startlevel = math.ceil(startlevel)
+
+if startlevel == 0:
+    startlevel = 1
+
 while score < target:
     count += 1
     score += (count * 10)
@@ -13,7 +19,7 @@ while score < target:
 level = (score ** 0.5)/50
 level = math.ceil(level)
 
-frames += (level-1) * 46
+frames += (level-startlevel) * 46
 hours = (frames // 216000)
 minutes = (frames // 3600) % 60
 seconds = (frames % 3600)/60
