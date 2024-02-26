@@ -16,14 +16,6 @@ while score < target:
     score += (count * 10)
     frames += 58
 
-level = (score ** 0.5)/50
-level = math.ceil(level)
-
-frames += (level-startlevel) * 46
-hours = (frames // 216000)
-minutes = (frames // 3600) % 60
-seconds = (frames % 3600)/60
-
 if score >= 99999999:
     score = 99999999
 
@@ -32,6 +24,14 @@ if score <= 9999:
 
 if level >= 99:
     level = 99
+    
+level = (score ** 0.5)/50
+level = math.ceil(level)
+
+frames += (level-startlevel) * 46
+hours = (frames // 216000)
+minutes = (frames // 3600) % 60
+seconds = (frames % 3600)/60
 
 if 0 <= seconds <= 9:
     seconds = "0" + str("%.2f" % seconds)
