@@ -19,6 +19,7 @@ while score < target:
 if score >= 99999999:
     score = 99999999
 
+level = 0
 if score <= 9999:
     level = 1
 

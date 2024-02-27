@@ -1,7 +1,7 @@
 from copy import deepcopy
 from copy import copy
 from time import perf_counter
-
+chainGain = 100
 
 
 def pntsToLevel(points):
@@ -24,7 +24,7 @@ def quicksimLevelup(enemies,crntPoints,crntChain,crntPath=""):
         crntPath = crntPath + str(enemies[0])
         enemies[0] -= atk
         if enemies[0] <= 0:
-            crntChain += 100
+            crntChain += chainGain
             del enemies[0]
         newPoints += crntChain
     return ((newPoints,crntPath),hitsNeeded(m,pntsToLevel(newPoints)) != hitsNeeded(m,atk))       
@@ -92,7 +92,7 @@ def BruteForce(crntEnemies,crntPoints,crntChain, count=False,crntPath=""):
            crntPathtemp = crntPath + str(sq[i])
            sq[i]-= crntAttack #applies the damage
            if sq[i] <= 0:
-                newChain = crntChain + 100
+                newChain = crntChain + chainGain
                 del sq[i]
            else:
                newChain = crntChain
@@ -147,6 +147,16 @@ while type(starting_hp) != int or starting_hp <= -1:
         starting_hp = int(input("enter the starting amount of points: "))
     except:
         print("please enter a number over 0.")
+
+
+chainGain = "a"
+while type(chainGain) != int or chainGain <= -1:
+
+    try:
+        chainGain = int(input("enter the chain gained from each enemy: "))
+    except:
+        print("please enter a number over 0.")
+
 import threading
 
 cycleCountEstimate = (hp ** 1.5) ** float(amount)
